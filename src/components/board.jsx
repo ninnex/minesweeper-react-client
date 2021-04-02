@@ -15,7 +15,18 @@ function Board (){
     const [smat , setMat] = useState(nmat);
    
     
-    
+    function handleOnClick(i, j){
+        console.log('clicked! ' + i + " - "+ j);
+
+        var laqui= convertMatriz([
+            [0,0,0,0,0],
+            [0,0,0,0,0],
+            [0,0,0,0,0]
+        ]);
+        setMat(laqui);
+
+        console.log(smat);
+    }
 
     return <div>
 
@@ -24,7 +35,7 @@ function Board (){
                             <span style={{fontSize: 50, fontWeight: "bold"}} 
                             key={getBoardKey(ob.i, ob.j)} 
                             className={getColor(ob.val)}
-                            >
+                            onClick={() => handleOnClick(ob.i, ob.j)}>
                                 {ob.val}</span>
                                     )}
                         </li>                         
