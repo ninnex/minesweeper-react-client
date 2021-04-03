@@ -28,6 +28,15 @@ function Board (){
         console.log(smat);
     }
 
+    function callApi(){
+        fetch('https://jsonplaceholder.typicode.com/users')
+        .then(res => res.json())
+        .then(json => {
+            console.log(json[0]["id"]);
+            });
+         
+    }
+
     return <div>
 
                 {smat.map( row => 
