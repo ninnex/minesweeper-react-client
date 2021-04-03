@@ -37,6 +37,12 @@ function Board (){
          
     }
 
+    
+    useEffect( () => {
+        callApi();
+        }        
+        , []);
+
     return <div>
 
                 {smat.map( row => 
