@@ -1,14 +1,12 @@
 import React, { Component, useEffect, useState } from 'react';
 import {convertMatriz, getBoardKey, getColor} from '../util.js'
+import {callApi} from '../serverconnection.js'
 
 function Board (){
 
  
-    let matriz = [
-                    [0,0,0,0,7],
-                    [0,2,0,0,0],
-                    [0,0,0,3,3]
-                ];
+    
+    let matriz = [];
 
   
     var nmat = convertMatriz(matriz);
@@ -17,44 +15,35 @@ function Board (){
     
     function handleOnClick(i, j){
         console.log('clicked! ' + i + " - "+ j);
-
-        var laqui= convertMatriz([
-            [0,0,0,0,0],
-            [0,0,0,0,0],
-            [0,0,0,0,0]
-        ]);
-        setMat(laqui);
-
-        console.log(smat);
-    }
-
-    function callApi(){
-        fetch('https://jsonplaceholder.typicode.com/users')
-        .then(res => res.json())
-        .then(json => {
-            console.log(json[0]["id"]);
-            });
-         
+        callApi("play", i, j).then(res => {
+            setMat(res);
+        })        
+          
+        
     }
 
     
+
+    
     useEffect( () => {
-        callApi();
+         callApi("getboard").then(res => {
+            setMat(res);
+            })        
         }        
         , []);
 
     return <div>
-
+                <table>
                 {smat.map( row => 
-                        <li>{row.map( ob => 
-                            <span style={{fontSize: 50, fontWeight: "bold"}} 
-                            key={getBoardKey(ob.i, ob.j)} 
+                        <tr>{row.map( ob => 
+                            <span style={{fontSize: 20, fontWeight: "bold", width: 45, height: 45}}                             key={getBoardKey(ob.i, ob.j)} 
                             className={getColor(ob.val)}
                             onClick={() => handleOnClick(ob.i, ob.j)}>
-                                {ob.val}</span>
+                                {ob.val==9?"-":ob.val}</span>
                                     )}
-                        </li>                         
+                        </tr>                         
                 )}
+                </table>
             </div>;
 
     

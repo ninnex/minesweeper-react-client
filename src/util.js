@@ -23,6 +23,15 @@ export function getBoardKey(i, j){
     return i + "-" + j;
 }
 
-export function getColor(num){        
-    return "badge m-2 " +(num === 0 ? "badge-primary": "badge-warning" )
+export function getColor(num){ 
+    var comp
+    switch (num ){
+        case 9 : comp = "badge-warning"; break;
+        case 0 : comp = "badge-primary"; break;
+        case 10 : comp = "badge-danger"; break;
+        default : comp = "badge-primary"; break;
+    }
+          
+    
+    return "badge m-2 " + comp;
 } 
