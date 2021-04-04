@@ -63,7 +63,23 @@ function Board (){
 
               }, 200)
             }
-          }
+          };
+
+
+          function handleOnClickLoad(){
+            callApi("load", 0, 0).then(res => {
+                setMat(convertMatriz(res["matriz"]));
+                setStatus(res["status"])
+                console.log(res["status"]);
+            })  
+          };
+          function handleOnClickSave(){
+            callApi("save", 0, 0).then(res => {
+                setMat(convertMatriz(res["matriz"]));
+                setStatus(res["status"])
+                console.log(res["status"]);
+            })  
+          };
 
     return <div>
                  <h1>{getStatus(status)}</h1> 
@@ -79,6 +95,8 @@ function Board (){
                         </tr>                         
                 )}
                 </table>
+                <button className="badge" onClick={handleOnClickSave}>Save</button>
+                <button className="badge" onClick={handleOnClickLoad}>Load</button>
             </div>;
 
     
