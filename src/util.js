@@ -29,9 +29,19 @@ export function getColor(num){
         case 9 : comp = "badge-warning"; break;
         case 0 : comp = "badge-primary"; break;
         case 10 : comp = "badge-danger"; break;
+        case 11 : comp = "badge-success"; break;
         default : comp = "badge-primary"; break;
     }
           
     
     return "badge m-2 " + comp;
 } 
+
+export function getStatus(sta){
+    switch(sta){
+        case "loose" : return "YOU LOOSE!";
+        case "win" : return "YOU WIN!";
+        default : return "";
+
+    }
+}
